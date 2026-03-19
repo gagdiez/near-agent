@@ -1,0 +1,41 @@
+{
+  "name": "meilisearch-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for MeiliSearch integration",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "meilisearch-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/agent/index.js",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "mcp",
+    "meilisearch",
+    "search",
+    "model-context-protocol"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.46",
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "ai": "^6.0.97",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "near-api-js": "^7.1.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.10",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
