@@ -2,10 +2,11 @@
 import { anthropic } from "@ai-sdk/anthropic";
 import { ModelMessage, stepCountIs, streamText } from "ai";
 import "dotenv/config";
-import { KeyPairSigner, KeyPairString } from "near-api-js";
+import { Account, KeyPairSigner, KeyPairString } from "near-api-js";
 import * as readline from "readline";
 import { createNearTools } from "../tools/tools.js";
 import { createSignerTools } from "../tools/signer-tools.js";
+import { createMpcTools } from "../tools/mpc-tools.js";
 
 const SYSTEM_PROMPT = `You are a NEAR Protocol agent that can check balances, build transactions, sign them, and broadcast them.
 
@@ -28,9 +29,17 @@ async function main() {
 
   const signer = KeyPairSigner.fromSecretKey(process.env.NEAR_PRIVATE_KEY as KeyPairString);
 
+  const nearAccount = new Account(
+    process.env.NEAR_ACCOUNT_ID!,
+    'https://test.rpc.fastnear.com',
+    signer
+  )
+
   const tools = {
     ...createNearTools({ defaultNetwork: "testnet" }),
     ...createSignerTools(signer),
+    // @ts-expect-error Account is practically the same
+    ...(await createMpcTools({ nearAccount, derivationPath: '0' }))
   };
 
   const history: ModelMessage[] = [];

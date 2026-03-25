@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  multichain-sig: link:../multichain-sig
+
 importers:
 
   .:
@@ -26,6 +29,9 @@ importers:
       express:
         specifier: ^5.2.1
         version: 5.2.1
+      multichain-sig:
+        specifier: link:../multichain-sig
+        version: link:../multichain-sig
       near-api-js:
         specifier: ^7.1.1
         version: 7.1.1
